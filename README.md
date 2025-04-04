@@ -1,4 +1,4 @@
-# Python Script - Outreachy Task 2
+# Python Script - Task 2
 
 ### Objective
 This task create a Python script that reads a list of URLs from a CSV file and checks their HTTP status codes by making requests to each URL.
@@ -10,19 +10,17 @@ The script reads a CSV file containing a list of URLs and sends an HTTP GET requ
 ```
 Example:  
 ```
-(200) https://www.nytimes.com/1999/07/04/sports/women-s-world-cup-sissi-of-brazil-has-right-stuff-with-left-foot.html  
-(404) https://invalid-url.com  
-(000) https://unreachable-site.com  
-```
-- If the URL is unreachable, the script will print `(000)` to indicate a connection error.  
+(200) http://www.bolabrasilmulher.com.br/conheca-a-chu-santos-atacante-convocada-pela-tecnica-emily-lima/
+(000 - ConnectionError) http://www.futeboldabahia.com.br/Feminino.html
+(000 - ReadTimeout) http://www.periodicos.letras.ufmg.br/index.php/fulia/issue/view/677/showToc  
+```  
 
 ### Features  
-- Reads URLs from a CSV file.  
-- Sends HTTP GET requests to check the status of each URL.  
-- Prints the status code in the specified format.  
-- Handles connection errors and prints `(000)` if a URL is unreachable.  
-
-## Usage  
+- Reads a list of URLs from a CSV file provided as a command-line argument.  
+- Skips the header row to avoid processing non-URL data.  
+- Makes HTTP requests to check the status codes of the URLs.  
+- Displays the status code and the URL in a readable format.  
+- Uses `(000 - Exception)` to indicate unreachable URLs and prints the exception name (Timeout, ConnectionError).
 
 ### Prerequisites  
 - Python 3  
@@ -32,15 +30,17 @@ Example:
 ```
 pip install requests
 ```  
+## Usage
 
-### Running the Script  
-
-#### Option 1: Locally on Your System  
-1. Download the `Task_2_Intern.csv` file containing the list of URLs.  
-2. Ensure the file is in the same directory as the Python script.  
-3. Run the script using the following command:  
+1. Place the CSV file in the same directory as the script.  
+2. Run the script using:  
    ```bash
-   python3 get_status_code.py
-   ```
-4. The script will print the status code for each URL in the specified format.  
+   python get_status_code.py Task_2_Intern.csv
+   ```  
 
+## Example Output  
+```
+(200) http://www.bolabrasilmulher.com.br/conheca-a-chu-santos-atacante-convocada-pela-tecnica-emily-lima/
+(000 - ConnectionError) http://www.futeboldabahia.com.br/Feminino.html
+(000 - ReadTimeout) http://www.periodicos.letras.ufmg.br/index.php/fulia/issue/view/677/showToc
+```  
